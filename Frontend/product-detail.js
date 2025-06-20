@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     try {
         // Show loading state
-        const detailContainer = document.getElementById('product-detail');
-        if (detailContainer) {
-            detailContainer.innerHTML = '<div class="loading-indicator">Loading product details...</div>';
-        }
+        document.getElementById('loading-indicator').style.display = 'block';
+        
+        // Hide error message initially
+        document.getElementById('error-message').style.display = 'none';
         
         // Fetch product from Firestore
         const product = await getProductById(productId);
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         displayProductDetail(product);
         
         // Update breadcrumb
-        const breadcrumb = document.getElementById('product-breadcrumb');
+        const breadcrumb = document.querySelector('.breadcrumb span');
         if (breadcrumb) {
             breadcrumb.textContent = product.name;
         }
@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Update cart count
         updateCartCount();
         
+        // Hide loading indicator
+        document.getElementById('loading-indicator').style.display = 'none';
+        
     } catch (error) {
         console.error('Error loading product:', error);
         showErrorMessage('Failed to load product details. Please try again later.');
@@ -66,101 +69,48 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 // Function to display error message
 function showErrorMessage(message) {
-    const detailContainer = document.getElementById('product-detail');
-    if (detailContainer) {
-        detailContainer.innerHTML = `
-            <div class="error-message">
-                <p>${message}</p>
-                <a href="products.html" class="btn">Browse All Products</a>
-            </div>
-        `;
-    }
+    // Hide loading indicator
+    document.getElementById('loading-indicator').style.display = 'none';
+    
+    // Show error message
+    const errorElement = document.getElementById('error-message');
+    errorElement.innerHTML = `
+        <p>${message}</p>
+        <a href="products.html" class="btn">Browse All Products</a>
+    `;
+    errorElement.style.display = 'block';
 }
 
 // Function to display product details
 function displayProductDetail(product) {
-    const detailContainer = document.getElementById('product-detail');
-    if (!detailContainer) return;
+    // Create the product detail wrapper
+    const productDetailContainer = document.querySelector('.container');
     
-    // Create thumbnails HTML
-    let thumbnailsHtml = '';
-    if (product.additionalImages && product.additionalImages.length > 0) {
-        thumbnailsHtml = `
-            <div class="product-thumbnail active" data-index="0">
-                <img src="${product.image}" alt="${product.name} - Main">
-            </div>
-        `;
-        
-        product.additionalImages.forEach((imgSrc, index) => {
-            thumbnailsHtml += `
-                <div class="product-thumbnail" data-index="${index + 1}">
-                    <img src="${imgSrc}" alt="${product.name} - Image ${index + 1}">
-                </div>
-            `;
-        });
-    }
+    // Clear any existing error message
+    document.getElementById('error-message').style.display = 'none';
     
-    // Collect all images for the gallery
-    const allImages = [product.image];
-    if (product.additionalImages) {
-        allImages.push(...product.additionalImages);
-    }
-    
-    // Check if product has features for the specifications tab
-    let specificationsHtml = '';
-    if (product.features && product.features.length > 0) {
-        specificationsHtml = `
-            <ul class="specifications-list">
-                ${product.features.map(feature => `<li>${feature}</li>`).join('')}
-            </ul>
-        `;
-    } else {
-        specificationsHtml = '<p>No specifications available for this product.</p>';
-    }
-    
-    // Create product video HTML if available
-    let videoHtml = '';
-    if (product.videoUrl) {
-        // Convert YouTube URL to embed format
-        const embedUrl = getYouTubeEmbedUrl(product.videoUrl);
-        
-        if (embedUrl) {
-            videoHtml = `
-                <div class="product-video">
-                    <iframe src="${embedUrl}" allowfullscreen></iframe>
-                </div>
-            `;
-        }
-    }
-    
-    // Format price
-    const formattedPrice = formatCurrency(product.price);
-    
-    // Check if product is in cart
-    const isInCart = cart.some(item => item.id === product.id);
-    
-    // Build complete product detail HTML
-    detailContainer.innerHTML = `
+    // Create product detail HTML structure
+    const productDetailHTML = `
         <div class="product-detail-wrapper">
             <div class="product-gallery">
                 <div class="product-main-image">
                     <img src="${product.image}" alt="${product.name}" id="main-product-image">
                 </div>
                 <div class="product-thumbnails">
-                    ${thumbnailsHtml}
+                    ${createThumbnailsHTML(product)}
                 </div>
-                ${videoHtml}
+                ${product.videoUrl ? createVideoHTML(product.videoUrl) : ''}
             </div>
             
             <div class="product-info">
                 <h1>${product.name}</h1>
-                <div class="product-price">৳${formattedPrice}</div>
+                <div class="product-price">৳${formatCurrency(product.price)}</div>
                 <div class="product-description">${product.description}</div>
                 
                 <div class="product-meta">
                     <div class="product-meta-item">
                         <span class="product-meta-label">Category:</span>
-                        <span>${product.category}</span>
+                        <span>${product.category || 'Uncategorized'}</span>
                     </div>
                     <div class="product-meta-item">
                         <span class="product-meta-label">SKU:</span>
@@ -168,7 +118,9 @@ function displayProductDetail(product) {
                     </div>
                     <div class="product-meta-item">
                         <span class="product-meta-label">Availability:</span>
-                        <span>${product.stock > 0 ? `In Stock (${product.stock} available)` : 'Out of Stock'}</span>
+                        <span class="${product.stock > 0 ? 'in-stock' : 'out-of-stock'}">
+                            ${product.stock > 0 ? `In Stock (${product.stock} available)` : 'Out of Stock'}
+                        </span>
                     </div>
                 </div>
                 
@@ -177,13 +129,13 @@ function displayProductDetail(product) {
                         <label for="quantity">Quantity:</label>
                         <div class="quantity-controls">
                             <button class="quantity-btn" id="decrease-qty">-</button>
-                            <input type="number" id="quantity" class="quantity-input" value="1" min="1" max="${product.stock || 10}">
+                            <input type="number" id="quantity" class="quantity-input" value="1" min="1" max="${product.stock || 1}">
                             <button class="quantity-btn" id="increase-qty">+</button>
                         </div>
                     </div>
                     
                     <button class="add-to-cart-btn" id="add-to-cart" ${product.stock <= 0 ? 'disabled' : ''}>
-                        ${isInCart ? 'Update Cart' : 'Add to Cart'}
+                        ${product.stock <= 0 ? 'Out of Stock' : 'Add to Cart!'}
                     </button>
                 </div>
             </div>
@@ -200,45 +152,103 @@ function displayProductDetail(product) {
             </div>
             
             <div id="specifications" class="tab-content">
-                ${specificationsHtml}
+                ${createSpecificationsHTML(product)}
             </div>
         </div>
     `;
     
+    // Insert the product detail HTML
+    const loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.insertAdjacentHTML('afterend', productDetailHTML);
+    
     // Set up thumbnail click event
+    setupThumbnailEvents();
+    
+    // Set up tab functionality
+    setupTabEvents();
+    
+    // Set up quantity buttons
+    setupQuantityEvents();
+    
+    // Set up add to cart button
+    setupAddToCartEvent(product);
+}
+
+// Function to create thumbnails HTML
+function createThumbnailsHTML(product) {
+    // Start with the main image
+    let thumbnailsHTML = `
+        <div class="product-thumbnail active" data-index="0">
+            <img src="${product.image}" alt="${product.name} - Main">
+        </div>
+    `;
+    
+    // Add additional images if available
+    if (product.additionalImages && product.additionalImages.length > 0) {
+        product.additionalImages.forEach((imgSrc, index) => {
+            thumbnailsHTML += `
+                <div class="product-thumbnail" data-index="${index + 1}">
+                    <img src="${imgSrc}" alt="${product.name} - Image ${index + 1}">
+                </div>
+            `;
+        });
+    }
+    
+    return thumbnailsHTML;
+}
+
+// Function to create video HTML
+function createVideoHTML(videoUrl) {
+    const embedUrl = getYouTubeEmbedUrl(videoUrl);
+    if (!embedUrl) return '';
+    
+    return `
+        <div class="product-video">
+            <iframe src="${embedUrl}" allowfullscreen></iframe>
+        </div>
+    `;
+}
+
+// Function to create specifications HTML
+function createSpecificationsHTML(product) {
+    if (!product.features || product.features.length === 0) {
+        return '<p>No specifications available for this product.</p>';
+    }
+    
+    let featuresHTML = '<ul class="specifications-list">';
+    product.features.forEach(feature => {
+        featuresHTML += `<li>${feature}</li>`;
+    });
+    featuresHTML += '</ul>';
+    
+    return featuresHTML;
+}
+
+// Function to set up thumbnail click events
+function setupThumbnailEvents() {
     document.querySelectorAll('.product-thumbnail').forEach(thumbnail => {
         thumbnail.addEventListener('click', function() {
             // Get the image index
             const index = parseInt(this.dataset.index);
             
+            // Get all thumbnails
+            const thumbnails = document.querySelectorAll('.product-thumbnail');
+            
+            // Get the image url from the clicked thumbnail
+            const imgSrc = this.querySelector('img').src;
+            
             // Update main image
-            document.getElementById('main-product-image').src = allImages[index];
+            document.getElementById('main-product-image').src = imgSrc;
             
             // Update active thumbnail
             document.querySelector('.product-thumbnail.active').classList.remove('active');
             this.classList.add('active');
         });
     });
-    
-    // Set up quantity buttons
-    const quantityInput = document.getElementById('quantity');
-    
-    document.getElementById('decrease-qty').addEventListener('click', function() {
-        const currentValue = parseInt(quantityInput.value);
-        if (currentValue > 1) {
-            quantityInput.value = currentValue - 1;
-        }
-    });
-    
-    document.getElementById('increase-qty').addEventListener('click', function() {
-        const currentValue = parseInt(quantityInput.value);
-        const maxValue = parseInt(quantityInput.max);
-        if (currentValue < maxValue) {
-            quantityInput.value = currentValue + 1;
-        }
-    });
-    
-    // Set up tab functionality
+}
+
+// Function to set up tab functionality
+function setupTabEvents() {
     document.querySelectorAll('.tab-button').forEach(button => {
         button.addEventListener('click', function() {
             // Get the target tab
@@ -258,10 +268,34 @@ function displayProductDetail(product) {
             document.getElementById(tabId).classList.add('active');
         });
     });
+}
+
+// Function to set up quantity buttons
+function setupQuantityEvents() {
+    const quantityInput = document.getElementById('quantity');
     
-    // Set up add to cart button
+    document.getElementById('decrease-qty').addEventListener('click', function() {
+        const currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    });
+    
+    document.getElementById('increase-qty').addEventListener('click', function() {
+        const currentValue = parseInt(quantityInput.value);
+        const maxValue = parseInt(quantityInput.max);
+        if (currentValue < maxValue) {
+            quantityInput.value = currentValue + 1;
+        }
+    });
+}
+
+// Function to set up add to cart button
+function setupAddToCartEvent(product) {
     document.getElementById('add-to-cart').addEventListener('click', function() {
-        const quantity = parseInt(quantityInput.value);
+        if (this.disabled) return;
+        
+        const quantity = parseInt(document.getElementById('quantity').value);
         addToCart(product, quantity);
         
         // Visual feedback
@@ -275,28 +309,38 @@ function displayProductDetail(product) {
 
 // Function to display related products
 function displayRelatedProducts(products) {
-    const relatedContainer = document.getElementById('related-products');
-    if (!relatedContainer || products.length === 0) return;
+    if (!products || products.length === 0) return;
     
-    let html = '<h2>You May Also Like</h2><div class="related-products-grid">';
+    // Create related products container if it doesn't exist
+    let relatedProductsContainer = document.querySelector('.related-products');
+    if (!relatedProductsContainer) {
+        relatedProductsContainer = document.createElement('div');
+        relatedProductsContainer.className = 'related-products';
+        document.querySelector('.container').appendChild(relatedProductsContainer);
+    }
     
+    // Create HTML for related products
+    let relatedProductsHTML = `
+        <h2>You May Also Like</h2>
+        <div class="related-products-grid">
+    `;
+    
+    // Add each related product
     products.forEach(product => {
-        const formattedPrice = formatCurrency(product.price);
-        
-        html += `
+        relatedProductsHTML += `
             <div class="related-product-card">
                 <div class="related-product-image">
                     <img src="${product.image}" alt="${product.name}">
                 </div>
                 <h3>${product.name}</h3>
-                <p class="related-product-price">৳${formattedPrice}</p>
+                <p class="related-product-price">৳${formatCurrency(product.price)}</p>
                 <a href="product-detail.html?id=${product.id}" class="related-product-link">View Details</a>
             </div>
         `;
     });
     
-    html += '</div>';
-    relatedContainer.innerHTML = html;
+    relatedProductsHTML += '</div>';
+    relatedProductsContainer.innerHTML = relatedProductsHTML;
 }
 
 // Function to add product to cart
@@ -317,8 +361,7 @@ function addToCart(product, quantity = 1) {
             name: product.name,
             price: product.price,
             image: product.image,
-            quantity: quantity,
-            sku: product.sku
+            quantity: quantity
         });
     }
     
@@ -332,7 +375,7 @@ function addToCart(product, quantity = 1) {
     showNotification(`${product.name} added to cart`);
 }
 
-// Function to update cart count in header
+// Function to update cart count
 function updateCartCount() {
     const cartCountElement = document.getElementById('cart-count');
     if (!cartCountElement) return;
@@ -351,20 +394,20 @@ function updateCartCount() {
 
 // Function to show notification
 function showNotification(message) {
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = 'notification';
+    // Create notification element if it doesn't exist
+    let notification = document.querySelector('.notification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.className = 'notification';
+        document.body.appendChild(notification);
+    }
+    
+    // Set message and show
     notification.textContent = message;
+    notification.classList.add('show');
     
-    // Add to body
-    document.body.appendChild(notification);
-    
-    // Show notification with animation
-    setTimeout(() => notification.classList.add('show'), 10);
-    
-    // Hide and remove after delay
+    // Hide after delay
     setTimeout(() => {
         notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 300);
     }, 3000);
 }

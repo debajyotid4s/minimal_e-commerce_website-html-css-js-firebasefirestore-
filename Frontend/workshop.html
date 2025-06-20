@@ -23,6 +23,7 @@
                     <li><a href="products.html">Products</a></li>
                     <li><a href="cart.html">Cart <span id="cart-count">0</span></a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login_signup.html" class="login-signup-link">Log In / Sign Up</a></li>
                 </ul>
             </nav>
         </div>
@@ -37,20 +38,6 @@
                     <div class="form-group">
                         <label for="description">Describe Your Desired Instrument</label>
                         <textarea id="description" rows="10" placeholder="Tell us about your ideal instrument, including details about sound preferences, size, materials, etc."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="image-upload">Upload Reference Images</label>
-                        <div class="image-upload-container">
-                            <input type="file" id="image-upload" multiple accept="image/*">
-                            <label for="image-upload" class="upload-button">
-                                <span>Select Images</span>
-                                <small>You can select multiple images</small>
-                            </label>
-                        </div>
-                        <div class="image-preview-container" id="image-preview">
-                            <!-- Preview images will be displayed here -->
-                        </div>
                     </div>
 
                     <button id="tunein-button" class="tunein-button">TuneIn</button>
@@ -92,5 +79,6 @@
     <script src="script.js"></script>
     <script src="workshop.js"></script>
     <script type="module" src="auth-ui.js"></script>
+    <script type="module" src="../Backend/workshop-service.js"></script>
 </body>
 </html>

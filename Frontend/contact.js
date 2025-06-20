@@ -32,15 +32,31 @@ document.addEventListener('DOMContentLoaded', function() {
             lessonForm.querySelector('button[type="submit"]').disabled = true;
             lessonForm.querySelector('button[type="submit"]').innerHTML = 'Submitting...';
             
-            setTimeout(function() {
-                // In a real application, you would send the form data to your server here
-                // using fetch or XMLHttpRequest
-                
-                showResponse('Thank you for your inquiry! We will contact you soon to discuss lesson options.', 'success');
-                lessonForm.reset();
-                lessonForm.querySelector('button[type="submit"]').disabled = false;
-                lessonForm.querySelector('button[type="submit"]').innerHTML = 'Submit Request <i class="fas fa-arrow-right"></i>';
-            }, 1500);
+            // Check if the Firestore submit function exists (from contact-service.js)
+            if (typeof window.submitLessonRequestToFirestore === 'function') {
+                // Submit to Firestore
+                window.submitLessonRequestToFirestore(formValues)
+                    .then(result => {
+                        if (result.success) {
+                            showResponse('Thank you for your inquiry! We will contact you soon to discuss lesson options.', 'success');
+                            lessonForm.reset();
+                        } else {
+                            showResponse(`An error occurred: ${result.error}. Please try again later.`, 'error');
+                        }
+                        
+                        // Reset button
+                        lessonForm.querySelector('button[type="submit"]').disabled = false;
+                        lessonForm.querySelector('button[type="submit"]').innerHTML = 'Submit Request <i class="fas fa-arrow-right"></i>';
+                    });
+            } else {
+                // Fall back to the original behavior if Firestore function is not available
+                setTimeout(function() {
+                    showResponse('Thank you for your inquiry! We will contact you soon to discuss lesson options.', 'success');
+                    lessonForm.reset();
+                    lessonForm.querySelector('button[type="submit"]').disabled = false;
+                    lessonForm.querySelector('button[type="submit"]').innerHTML = 'Submit Request <i class="fas fa-arrow-right"></i>';
+                }, 1500);
+            }
         });
     }
     

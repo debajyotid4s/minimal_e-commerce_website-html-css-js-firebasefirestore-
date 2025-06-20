@@ -1,4 +1,4 @@
-import { db } from './firebase-config.js';
+import { db } from '../Frontend/config/firebase-config.js';
 import { collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
 // Product data
@@ -147,7 +147,76 @@ const productsData = [
       "assets/ASGll3.jpg",
       "assets/ASGll4.jpg"
     ]
-  } 
+  },
+  {
+    id: 7,
+    name: "Anusswar's Travel Size Acoustic Guitar",
+    price: 13999,
+    image: "assets/ATSAG.jpg",
+    category: "Guitar",
+    description: "Anusswar's Travel Size Acoustic Guitar is a compact and lightweight guitar designed for musicians on the move. It features a solid wood body, steel strings, and a beautiful finish, making it perfect for both beginners and experienced players.",
+    features: [
+      "Body - Teak Wood",
+      "Neck - Mahogany",
+      "Fretboard - Rosewood",
+      "Bridge - Rosewood",
+      "Finish - Glossy Natural"
+    ],
+    stock: 2,
+    sku: "ATSAG-007",
+    videoUrl: "https://youtu.be/rSWyKF5B8CI?si=BfDIOj7II4JF47Xj",
+    additionalImages: [
+      "assets/ATSAG.jpg",
+    ]
+  },
+  {
+    id: 8,
+    name: "Ausswar Mini Classical Guitar (White Edition)",
+    price: 9999,
+    image: "assets/AMCGW.jpg",
+    category: "Guitar",
+    description: "Ausswar Mini Classical Guitar is a compact and portable guitar designed for musicians on the go. It features a solid wood body, nylon strings, and a beautiful finish, making it perfect for both beginners and experienced players.",
+    features: [
+      "Scale Length - 17inches",
+      "Total Length - 29inches",
+      "Nut Width - 48 mm",
+      "Body Depth - 2.9inches",
+      "Body length - 12.5inches",
+      "Body - Laminated Teak Wood",
+      "Neck - Mahogany Wood",
+      "Fretboard - Rosewood",
+      "Bridge - Rosewood "
+    ],
+    stock: 4,
+    sku: "AMCGW-001",
+    videoUrl: "https://youtu.be/jdlqcAAuZeA?si=kpDRZGsoTq6MI2aJ",
+    additionalImages: [
+      "assets/AMCGW.jpg",
+    ]
+
+  },
+  {
+    id: 9,
+    name: "Anusswar's Vintage Edition Ukulele",
+    price: 15500,
+    image: "assets/AVEU.jpg",
+    category: "Ukulele",
+    description: "Anusswar's Ukulele is a beautifully crafted instrument made from high-quality wood. It features a soprano size, making it perfect for beginners and experienced players alike. The ukulele produces a warm and rich sound, ideal for various music styles.",
+    features: [
+      "Body - Mahogany",
+      "Neck - Mahogany",
+      "Fretboard - Rosewood",
+      "Bridge - Rosewood",
+      "Finish - Glossy Natural"
+    ],
+    stock: 1,
+    sku: "AVEU-009",
+    videoUrl: "https://youtu.be/jdlqcAAuZeA?si=C-WGPYbztNrdpxtS",
+    additionalImages: [
+      "assets/AVEU.jpg",
+      "assets/AVEU2.jpg",
+    ]
+  }
 ];
 
 // Function to check if a product already exists in the database

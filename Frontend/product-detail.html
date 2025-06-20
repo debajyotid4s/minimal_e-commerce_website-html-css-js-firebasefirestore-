@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details - অনুস্বর / Anusswar</title>
-     <link rel="icon" href="assets/anusswar.jpg" type="image/x-icon">
+    <link rel="icon" href="assets/anusswar.jpg" type="image/x-icon">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/product-detail.css">
     <link href="https://fonts.cdnfonts.com/css/futura-pt" rel="stylesheet">
@@ -22,6 +22,7 @@
                     <li><a href="products.html">Products</a></li>
                     <li><a href="cart.html">Cart <span id="cart-count">0</span></a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login_signup.html" class="login-signup-link">Log In / Sign Up</a></li>
                 </ul>
             </nav>
         </div>
@@ -29,43 +30,78 @@
 
     <main>
         <div class="container">
+            <!-- Breadcrumb Navigation -->
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> &gt; 
+                <a href="products.html">Products</a> &gt; 
+                <span id="product-breadcrumb">Product Detail</span>
+            </div>
+            
+            <!-- Loading indicator -->
             <div id="loading-indicator" class="loading">Loading product...</div>
+            
+            <!-- Error message container -->
             <div id="error-message" class="error-message" style="display: none;"></div>
             
-            <div class="product-detail-container">
-                <div class="product-images" id="product-images">
-                    <div class="main-image-container">
-                        <img id="main-image" src="assets/placeholder.jpg" alt="Product Image">
+            <!-- Product Detail Layout -->
+            <div class="product-detail-container" style="display: none;">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img id="main-product-image" src="assets/placeholder.jpg" alt="Product Image">
                     </div>
-                    <div class="thumbnails" id="thumbnails">
-                        <!-- Thumbnails will be added dynamically -->
+                    
+                    <div class="product-thumbnails" id="product-thumbnails">
+                        <!-- Thumbnails will be inserted here -->
+                    </div>
+                    
+                    <div class="product-video-container" id="product-video-container">
+                        <!-- YouTube video will be inserted here if available -->
                     </div>
                 </div>
                 
                 <div class="product-info">
-                    <h1 id="product-title">Product Title</h1>
+                    <h1 id="product-name">Product Name</h1>
                     <div class="product-price" id="product-price">৳0.00</div>
                     
-                    <div class="product-description-container">
-                        <h3>Description</h3>
-                        <p id="product-description">Product description will be displayed here.</p>
+                    <div class="product-description" id="product-description">
+                        Product description goes here.
                     </div>
                     
-                    <div class="product-features-container">
-                        <h3>Features</h3>
-                        <div id="product-features">
-                            <!-- Features will be added dynamically -->
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Category:</span>
+                            <span id="product-category">Uncategorized</span>
+                        </div>
+                        
+                        <div class="meta-item">
+                            <span class="meta-label">SKU:</span>
+                            <span id="product-sku">N/A</span>
+                        </div>
+                        
+                        <div class="meta-item">
+                            <span class="meta-label">Availability:</span>
+                            <span id="product-availability">In Stock</span>
                         </div>
                     </div>
                     
                     <div class="product-actions">
                         <div class="quantity-selector">
-                            <button class="quantity-decrement">-</button>
+                            <span class="quantity-label">Quantity:</span>
+                            <button id="decrease-qty" class="quantity-btn">-</button>
                             <input type="number" id="quantity" value="1" min="1">
-                            <button class="quantity-increment">+</button>
+                            <button id="increase-qty" class="quantity-btn">+</button>
                         </div>
-                        <button id="add-to-cart-btn" class="add-to-cart-btn">Add to Cart</button>
+                        
+                        <button id="add-to-cart-btn" class="btn-primary">Add to Cart!</button>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Related Products Section -->
+            <div id="related-products" class="related-products" style="display: none;">
+                <h2>You May Also Like</h2>
+                <div class="related-products-grid" id="related-products-grid">
+                    <!-- Related products will be inserted here -->
                 </div>
             </div>
         </div>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - অনুস্বর / Anusswar</title>
+    <link rel="icon" href="assets/anusswar.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/contact.css">
+    <link href="https://fonts.cdnfonts.com/css/futura-pt" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/anusswar.jpg" alt="Anusswar Logo" width="40" height="40">
+                <h1><b>অনুস্বর / Anusswar</b></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart <span id="cart-count">0</span></a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-hero">
+            <div class="container">
+                <h1 class="page-title">Get in Touch</h1>
+                <p class="hero-subtitle">We'd love to hear from you, whether you have questions about our instruments or want to learn with us.</p>
+            </div>
+        </section>
+        
+        <section class="contact-options">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- General Contact Section -->
+                    <div class="contact-card">
+                        <h2>Contact Us</h2>
+                        <p>Feel free to reach out through any of these channels:</p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="details">
+                                    <h3>Visit Us</h3>
+                                    <p>Shonirakhra, Gobindapur Road no. 1,<br>Dhaka, Bangladesh</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="details">
+                                    <h3>Call Us</h3>
+                                    <p>(+88) 01721-514669</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="details">
+                                    <h3>Email Us</h3>
+                                    <p>anusswarguitars@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="social-media">
+                            <h3>Connect on Social Media</h3>
+                            <div class="social-icons">
+                                <a href="https://facebook.com/anusswar" target="_blank" class="social-icon">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://wa.me/8801721514669" target="_blank" class="social-icon">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                <a href="https://m.me/anusswar" target="_blank" class="social-icon">
+                                    <i class="fab fa-facebook-messenger"></i>
+                                </a>
+                                <a href="https://instagram.com/anusswar" target="_blank" class="social-icon">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Learning Request Section -->
+                    <div class="contact-card learning-card">
+                        <h2>Request Instrument Lessons</h2>
+                        <p>Want to learn how to play? Fill out this form and we'll help you get started.</p>
+                        
+                        <form id="lesson-form" class="lesson-form">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="instrument">Instrument You Want to Learn</label>
+                                <select id="instrument" name="instrument" required>
+                                    <option value="">-- Select Instrument --</option>
+                                    <option value="guitar">Guitar</option>
+                                    <option value="ukulele">Ukulele</option>
+                                    <option value="guitalele">Guitalele</option>
+                                    <option value="sandhi">Sandhi</option>
+                                    <option value="other">Other (Specify Below)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="experience">Your Experience Level</label>
+                                <select id="experience" name="experience" required>
+                                    <option value="">-- Select Level --</option>
+                                    <option value="beginner">Beginner (Never played before)</option>
+                                    <option value="novice">Novice (Know a few basics)</option>
+                                    <option value="intermediate">Intermediate (Can play songs)</option>
+                                    <option value="advanced">Advanced (Looking to improve skills)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lesson-type">Preferred Lesson Format</label>
+                                <select id="lesson-type" name="lesson-type" required>
+                                    <option value="">-- Select Format --</option>
+                                    <option value="in-person">In-Person Lessons</option>
+                                    <option value="online">Online Lessons</option>
+                                    <option value="hybrid">Hybrid (Mix of Online and In-Person)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="message">Additional Details</label>
+                                <textarea id="message" name="message" rows="5" placeholder="Tell us about your goals, preferred schedule, any specific songs you want to learn, etc."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="request-button">
+                                Submit Request
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </form>
+                        
+                        <div id="form-response" class="form-response"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="map-section">
+            <div class="container">
+                <h2>Find Us</h2>
+                <div class="map-container">
+                    <!-- Replace with your actual Google Maps embed code -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.2325242888135!2d90.4396945!3d23.7431204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQ0JzM1LjIiTiA5MMKwMjYnMjMuMCJF!5e0!3m2!1sen!2sbd!4v1624182312345!5m2!1sen!2sbd" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>অনুস্বর / Anusswar</h3>
+                    <p>SOULFUL INSTRUMENTS FOR GREAT LIFE</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: anusswarguitars@gmail.com</p>
+                    <p>Phone: (+88) 01721-514669</p>
+                    <p>Address: Shonirakhra, Gobindapur Road no. 1, Dhaka, Bangladesh</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 অনুস্বর / Anusswar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="contact.js"></script>
+    <script type="module" src="auth-ui.js"></script>
+</body>
+</html>

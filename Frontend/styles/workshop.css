@@ -1,0 +1,198 @@
+/* Workshop Page Styles */
+body {
+    font-family: 'Futura PT', sans-serif;
+}
+
+.workshop-section {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+}
+
+.workshop-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+textarea#description {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-family: 'Futura PT', sans-serif;
+    font-size: 16px;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+textarea#description:focus {
+    border-color: #27ae60;
+    outline: none;
+}
+
+.image-upload-container {
+    margin-bottom: 15px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.upload-button {
+    display: inline-block;
+    background-color: #ed42af;
+    color: #d4edda;
+    padding: 15px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+    background-color: #770737;
+}
+
+.upload-button span {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.upload-button small {
+    display: block;
+    font-size: 14px;
+     color: #ffffff;
+}
+
+.image-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.image-preview {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.tunein-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Futura PT', sans-serif;
+}
+
+.tunein-button:hover {
+    background-color: #45a049;
+}
+
+.submission-status {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+/* Add this to your workshop.css file */
+footer {
+    background-image: url('assets/workshop.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 100%;
+}
+
+/* Add a dark overlay to ensure text remains readable over the image */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Black overlay with 70% opacity */
+    z-index: 1;
+}
+
+/* Ensure all footer content stays above the overlay */
+footer .container {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px; /* Increase from default (likely 1200px or 1000px) */
+    width: 95%; /* Use a percentage to ensure responsiveness */
+    margin: 0 auto; /* Center the container */
+}
+
+/* Adjust text color for better readability over the background image */
+.footer-content h3,
+.footer-content p,
+.footer-content li,
+.footer-content a,
+.footer-bottom p {
+    color: white;
+}
+
+.footer-content a:hover {
+    color: #ed42af; /* Orange color on hover for better visibility */
+}

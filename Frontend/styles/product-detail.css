@@ -1,0 +1,262 @@
+.breadcrumb {
+    margin: 20px 0;
+    color: var(--dark-gray);
+}
+
+.breadcrumb a {
+    color: var(--primary-color);
+}
+
+.product-detail-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.product-gallery {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-main-image {
+    width: 100%;
+    height: 400px;
+    background-color: var(--light-gray);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+
+
+.product-main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-thumbnails {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.product-thumbnail {
+    width: 80px;
+    height: 80px;
+    background-color: var(--light-gray);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.product-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-thumbnail.active {
+    border: 2px solid var(--primary-color);
+}
+
+.product-video {
+    margin-top: 20px;
+}
+
+.product-video iframe {
+    width: 100%;
+    height: 250px;
+    border-radius: var(--border-radius);
+    border: none;
+}
+
+.product-info h1 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.product-description {
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.product-meta {
+    margin-bottom: 20px;
+}
+
+.product-meta-item {
+    margin-bottom: 10px;
+}
+
+.product-meta-label {
+    font-weight: 600;
+    display: inline-block;
+    width: 120px;
+}
+
+.product-actions {
+    margin-top: 30px;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.quantity-selector label {
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+}
+
+.quantity-btn {
+    width: 35px;
+    height: 35px;
+    background-color: var(--light-gray);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-input {
+    width: 50px;
+    height: 35px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid var(--medium-gray);
+    border-right: 1px solid var(--medium-gray);
+}
+
+.add-to-cart-btn {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #2563eb;
+}
+
+.wishlist-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    background-color: white;
+    cursor: pointer;
+}
+
+.wishlist-btn .heart-icon {
+    margin-right: 5px;
+}
+
+.product-tabs {
+    margin-top: 40px;
+}
+
+.tabs-header {
+    display: flex;
+    border-bottom: 1px solid var(--medium-gray);
+    margin-bottom: 20px;
+}
+
+body {
+    font-family: 'Futura PT', sans-serif;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--dark-gray);
+}
+
+.tab-button.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.tab-content {
+    display: none;
+    padding: 20px 0;
+    line-height: 1.7;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.related-products {
+    margin-top: 60px;
+}
+
+.related-products h2 {
+    margin-bottom: 20px;
+}
+
+/* Add these at the end of your product-details.css file */
+
+@media (max-width: 768px) {
+    .product-detail-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-main-image {
+        height: 300px;
+    }
+    
+    .tabs-header {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px;
+    }
+    
+    .tab-button {
+        flex-shrink: 0;
+    }
+    
+    .product-video iframe {
+        height: 200px;
+    }
+    
+    .quantity-selector {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .quantity-selector label {
+        margin-bottom: 8px;
+    }
+}

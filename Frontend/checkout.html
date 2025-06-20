@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - অনুস্বর / Anusswar</title>
+    <link rel="icon" href="assets/anusswar.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles/checkout.css">
+    <link href="https://fonts.cdnfonts.com/css/futura-pt" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/anusswar.jpg" alt="Anusswar Logo" width="40" height="40">
+                <h1><b>অনুস্বর / Anusswar</b></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart <span id="cart-count">0</span></a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title">Checkout</h1>
+            
+            <div class="checkout-wrapper">
+                <div class="checkout-form">
+                    <form id="ceckoutForm">
+                        <div class="form-section">
+                            <h2>Personal Information</h2>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mobile">Mobile Number *</label>
+                                <input type="tel" id="mobile" name="mobile" placeholder="e.g., 01XXXXXXXXX" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h2>Shipping Information</h2>
+                            
+                            <div class="form-group">
+                                <label for="address">Address *</label>
+                                <textarea id="address" name="address" rows="3" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="zone">Zone *</label>
+                                <select id="zone" name="zone" required>
+                                    <option value="">Select Zone</option>
+                                    <option value="dhaka">Dhaka</option>
+                                    <option value="barishal">Barishal</option>
+                                    <option value="khulna">Khulna</option>
+                                    <option value="chittagong">Chittagong</option>
+                                    <option value="sylhet">Sylhet</option>
+                                    <option value="mymensingh">Mymensingh</option>
+                                    <option value="rangpur">Rangpur</option>
+                                    <option value="rajshahi">Rajshahi</option>
+                                    <option value="dinajpur">Dinajpur</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h2>Delivery Method</h2>
+                            
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="homeDelivery" name="deliveryMethod" value="home" checked>
+                                    <label for="homeDelivery">Home Delivery (+৳200)</label>
+                                </div>
+                                
+                                <div class="radio-option">
+                                    <input type="radio" id="pickup" name="deliveryMethod" value="pickup">
+                                    <label for="pickup">Pickup</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h2>Payment Method</h2>
+                            
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="cod" name="paymentMethod" value="cod" checked>
+                                    <label for="cod">Cash on Delivery</label>
+                                </div>
+                                
+                                <div class="radio-option">
+                                    <input type="radio" id="online" name="paymentMethod" value="online">
+                                    <label for="online">Online Payment</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h2>Coupon</h2>
+                            
+                            <div class="form-group">
+                                <label for="coupon">Promo/Coupon Code</label>
+                                <div class="coupon-input">
+                                    <input type="text" id="coupon" name="coupon" placeholder="Enter your code">
+                                    <button type="button" id="applyCoupon">Apply</button>
+                                </div>
+                                <p id="couponMessage" class="coupon-message"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section terms-section">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="termsAgree" name="termsAgree" required>
+                                <label for="termsAgree">
+                                    I have read and agree to the 
+                                    <a href="terms.html" target="_blank">Terms and Conditions</a>, 
+                                    <a href="privacy.html" target="_blank">Privacy Policy</a>, and 
+                                    <a href="refund.html" target="_blank">Refund and Return Policy</a>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" id="placeOrder" class="place-order-btn" onclick="window.location.href='thankyou.html'">Place Order</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    
+                    <div id="cartItems" class="cart-items">
+                        <!-- Cart items will be loaded here -->
+                        <div class="cart-loading">Loading cart...</div>
+                    </div>
+                    
+                    <div class="price-details">
+                        <div class="price-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">৳0.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Delivery Fee</span>
+                            <span id="deliveryFee">৳200.00</span>
+                        </div>
+                        <div class="price-row" id="discountRow" style="display: none;">
+                            <span>Discount</span>
+                            <span id="discountAmount">-৳0.00</span>
+                        </div>
+                        <div class="price-row total">
+                            <span>Total</span>
+                            <span id="totalAmount">৳0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>অনুস্বর / Anusswar</h3>
+                    <p>SOULFUL INSTRUMENTS FOR GREAT LIFE</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: anusswarguitars@gmail.com</p>
+                    <p>Phone: (+88) 01721-514669</p>
+                    <p>Address: Shonirakhra, Gobindapur Road no. 1, Dhaka, Bangladesh</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 অনুস্বর / Anusswar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="orderSuccessModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="success-icon">✓</div>
+            <h2>Order Placed Successfully!</h2>
+            <p>Your order has been placed successfully. Your order number is: <span id="orderNumber"></span></p>
+            <p>We have sent you an email with the order details.</p>
+            <button id="continueShoppingBtn" class="continue-btn">Continue Shopping</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="checkout.js"></script>
+    <script type="module" src="auth-ui.js"></script>
+</body>
+</html>

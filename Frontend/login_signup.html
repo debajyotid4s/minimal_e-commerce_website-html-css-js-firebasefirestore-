@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Signup</title>
+    <title>Anusswar - Soulful Instruments for Great Life</title>
+    <link rel="icon" href="assets/anusswar.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles/login_signup.css">
+    <link href="https://fonts.cdnfonts.com/css/futura-pt" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <div class="logo">
+                    <h1><b>অনুস্বর / Anusswar</b></h1>
+                </div>
+                <div class="toggle-buttons">
+                    <button id="login-toggle" class="active">Login</button>
+                    <button id="signup-toggle">Sign Up</button>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form" class="form active">
+                <h2>Welcome Back</h2>
+                <p>Please login to your account</p>
+                
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="Enter your email">
+                    <span class="error-message" id="login-email-error"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="login-password" placeholder="Enter your password">
+                        <button type="button" class="toggle-password">
+                            <img src="assets/eye.png" alt="show password" class="eye-icon">
+                        </button>
+                    </div>
+                    <span class="error-message" id="login-password-error"></span>
+                </div>
+                
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="login-btn">Login</button>
+                
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="#" id="goto-signup">Sign Up</a></p>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="form">
+                <h2>Create Account</h2>
+                <p>Sign up for a new account</p>
+                
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" placeholder="Enter your full name">
+                    <span class="error-message" id="full-name-error"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email">
+                    <span class="error-message" id="signup-email-error"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="signup-password" placeholder="Create a password">
+                        <button type="button" class="toggle-password">
+                            <img src="assets/eye.png" alt="show password" class="eye-icon">
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-meter">
+                            <div class="strength-segment"></div>
+                            <div class="strength-segment"></div>
+                            <div class="strength-segment"></div>
+                            <div class="strength-segment"></div>
+                        </div>
+                        <span class="strength-text">Password strength</span>
+                    </div>
+                    <span class="error-message" id="signup-password-error"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <div class="password-container">
+                        <input type="password" id="confirm-password" placeholder="Confirm your password">
+                        <button type="button" class="toggle-password">
+                            <img src="assets/unhide.png" alt="show password" class="eye-icon">
+                        </button>
+                    </div>
+                    <span class="error-message" id="confirm-password-error"></span>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">I agree to the <a href="terms.html" target="_blank">Terms &amp; Conditions</a></label>
+                    <span class="error-message" id="terms-error"></span>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="signup-btn">Create Account</button>
+                
+                <div class="form-footer">
+                    <p>Already have an account? <a href="#" id="goto-login">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change to type="module" to support ES6 imports -->
+    <script type="module" src="login_signup.js"></script>
+    <script type="module" src="auth-ui.js"></script>
+</body>
+</html>

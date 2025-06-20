@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop - অনুস্বর / Anusswar</title>
+    <link rel="icon" href="assets/anusswar.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/workshop.css">
+    <link href="https://fonts.cdnfonts.com/css/futura-pt" rel="stylesheet">
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/anusswar.jpg" alt="Anusswar Logo" width="40" height="40">
+                <h1><b>অনুস্বর / Anusswar</b></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart <span id="cart-count">0</span></a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="workshop-section">
+            <div class="container">
+                <h1 class="page-title">Custom Instrument Workshop</h1>
+                
+                <div class="workshop-form">
+                    <div class="form-group">
+                        <label for="description">Describe Your Desired Instrument</label>
+                        <textarea id="description" rows="10" placeholder="Tell us about your ideal instrument, including details about sound preferences, size, materials, etc."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image-upload">Upload Reference Images</label>
+                        <div class="image-upload-container">
+                            <input type="file" id="image-upload" multiple accept="image/*">
+                            <label for="image-upload" class="upload-button">
+                                <span>Select Images</span>
+                                <small>You can select multiple images</small>
+                            </label>
+                        </div>
+                        <div class="image-preview-container" id="image-preview">
+                            <!-- Preview images will be displayed here -->
+                        </div>
+                    </div>
+
+                    <button id="tunein-button" class="tunein-button">TuneIn</button>
+                </div>
+                
+                <div id="submission-status" class="submission-status"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>অনুস্বর / Anusswar</h3>
+                    <p>SOULFUL INSTRUMENTS FOR GREAT LIFE</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: anusswarguitars@gmail.com</p>
+                    <p>Phone: (+88) 01721-514669</p>
+                    <p>Address: Shonirakhra, Gobindapur Road no. 1, Dhaka, Bangladesh</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 অনুস্বর / Anusswar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="workshop.js"></script>
+    <script type="module" src="auth-ui.js"></script>
+</body>
+</html>

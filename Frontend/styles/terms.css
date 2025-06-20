@@ -1,0 +1,87 @@
+/* Terms and Conditions Page Styles */
+body {
+    font-family: 'Futura PT', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.terms-section {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+}
+
+.terms-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.terms-notice {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-left: 5px solid #770737;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.terms-block {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.terms-block:last-child {
+    border-bottom: none;
+}
+
+.terms-block h2 {
+    color: #ed42af;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.terms-block h3 {
+    color: #444;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.terms-block p, .terms-block ul li {
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.terms-block ul {
+    padding-left: 20px;
+}
+
+.terms-block ul li {
+    list-style-type: disc;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .terms-content {
+        padding: 20px;
+    }
+    
+    .terms-block h2 {
+        font-size: 1.3rem;
+    }
+    
+    .terms-block p, .terms-block ul li {
+        font-size: 15px;
+    }
+}

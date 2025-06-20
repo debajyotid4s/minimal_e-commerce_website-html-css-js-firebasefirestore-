@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - অনুস্বর / Anusswar</title>
+    <link rel="icon" href="assets/anusswar.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/products.css">
+    <link href="https://fonts.cdnfonts.com/css/futura-pt" rel="stylesheet">
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/anusswar.jpg" alt="Anusswar Logo" width="40" height="40">
+                <h1><b>অনুস্বর / Anusswar</b></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="cart.html">Cart <span id="cart-count">0</span></a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="products-section">
+            <div class="container">
+                <h1 class="page-title">All Products</h1>
+                
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="category">Category:</label>
+                        <select id="category">
+                            <option value="all">All Categories</option>
+                            <option value="guitars">Guitars</option>
+                            <option value="ukuleles">Ukuleles</option>
+                            <option value="guitaleles">Guitaleles</option>
+                            <option value="sandhis">Sandhis</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="sort">Sort by:</label>
+                        <select id="sort">
+                            <option value="default">Default</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="products-grid" id="products-container">
+                    <!-- Products will be loaded here via JavaScript -->
+                    <div class="product-loader">Loading products...</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- New section added here -->
+        <section class="create-instrument-section">
+            <div class="container">
+                <div class="create-instrument-content">
+                    <h2>Would you like to create your own preferred instruments?</h2>
+                    <button class="create-instrument-button" onclick="window.location.href='workshop.html'">Enter Workshop</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>অনুস্বর / Anusswar</h3>
+                    <p>SOULFUL INSTRUMENTS FOR GREAT LIFE</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: anusswarguitars@gmail.com</p>
+                    <p>Phone: (+88) 01721-514669</p>
+                    <p>Address: Shonirakhra, Gobindapur Road no. 1, Dhaka, Bangladesh</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 অনুস্বর / Anusswar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="products.js"></script>
+    <script type="module" src="auth-ui.js"></script>
+</body>
+</html>

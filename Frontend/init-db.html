@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initialize Database</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #log {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Initialize Product Database</h1>
+    <p>Click the button to add products to your Firestore database.</p>
+    <button id="initButton">Initialize Products</button>
+    <div id="log"></div>
+
+    <script type="module">
+        import { addAllProducts } from './init-products.js'; // Make sure this matches your actual file name
+        
+        // Track if initialization is in progress
+        let initializationInProgress = false;
+        
+        // Function to add log entries
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        // Add event listener to the init button - only once!
+        const initButton = document.getElementById('initButton');
+        
+        // Remove any existing event listeners (if any)
+        initButton.replaceWith(initButton.cloneNode(true));
+        
+        // Get the fresh button reference
+        const newInitButton = document.getElementById('initButton');
+        
+        // Add a single event listener
+        newInitButton.addEventListener('click', async () => {
+            // Prevent multiple clicks
+            if (initializationInProgress) {
+                return;
+            }
+            
+            try {
+                // Set flag to prevent multiple executions
+                initializationInProgress = true;
+                
+                // Disable the button while processing
+                newInitButton.disabled = true;
+                newInitButton.textContent = 'Processing...';
+                
+                log('Starting to add products to database...');
+                
+                // Call the function only once
+                await addAllProducts();
+                
+                log('Products added successfully!');
+            } catch (error) {
+                log(`Error: ${error.message}`);
+                console.error(error);
+            } finally {
+                // Re-enable the button when done
+                initializationInProgress = false;
+                newInitButton.disabled = false;
+                newInitButton.textContent = 'Initialize Products';
+            }
+        });
+
+        // Clear any previous console overrides
+        console.log = console.log;
+        console.error = console.error;
+        
+        // Override console.log to display in the log div
+        const originalConsoleLog = console.log;
+        console.log = function(message) {
+            originalConsoleLog.apply(console, arguments);
+            if (typeof message === 'string') {
+                log(message);
+            } else {
+                log(String(message));
+            }
+        };
+
+        // Override console.error to display in the log div
+        const originalConsoleError = console.error;
+        console.error = function(message) {
+            originalConsoleError.apply(console, arguments);
+            if (typeof message === 'string') {
+                log(`ERROR: ${message}`);
+            } else {
+                log(`ERROR: ${String(message)}`);
+            }
+        };
+    </script>
+</body>
+</html>

@@ -29,15 +29,44 @@
 
     <main>
         <div class="container">
-            <div class="breadcrumb">
-                <a href="index.html">Home</a> &gt; 
-                <a href="products.html">Products</a> &gt;
-                <span id="product-breadcrumb">Product Detail</span>
-            </div>
+            <div id="loading-indicator" class="loading">Loading product...</div>
+            <div id="error-message" class="error-message" style="display: none;"></div>
             
-            <div class="product-details-container" id="product-detail">
-                <!-- Product details will be loaded here via JavaScript -->
-                <div class="product-loader">Loading product details...</div>
+            <div class="product-detail-container">
+                <div class="product-images" id="product-images">
+                    <div class="main-image-container">
+                        <img id="main-image" src="assets/placeholder.jpg" alt="Product Image">
+                    </div>
+                    <div class="thumbnails" id="thumbnails">
+                        <!-- Thumbnails will be added dynamically -->
+                    </div>
+                </div>
+                
+                <div class="product-info">
+                    <h1 id="product-title">Product Title</h1>
+                    <div class="product-price" id="product-price">৳0.00</div>
+                    
+                    <div class="product-description-container">
+                        <h3>Description</h3>
+                        <p id="product-description">Product description will be displayed here.</p>
+                    </div>
+                    
+                    <div class="product-features-container">
+                        <h3>Features</h3>
+                        <div id="product-features">
+                            <!-- Features will be added dynamically -->
+                        </div>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-decrement">-</button>
+                            <input type="number" id="quantity" value="1" min="1">
+                            <button class="quantity-increment">+</button>
+                        </div>
+                        <button id="add-to-cart-btn" class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -71,7 +100,7 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="product-detail.js"></script>
+    <script type="module" src="product-detail.js"></script>
     <script type="module" src="auth-ui.js"></script>
 </body>
 </html>

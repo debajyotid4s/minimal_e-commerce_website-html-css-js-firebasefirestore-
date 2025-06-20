@@ -155,7 +155,7 @@ input[type="file"] {
 }
 /* Add this to your workshop.css file */
 footer {
-    background-image: url('assets/workshop.jpg');
+    background-image: url('../assets/workshop.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

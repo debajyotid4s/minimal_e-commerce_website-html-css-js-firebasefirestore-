@@ -23,6 +23,7 @@
                     <li><a href="products.html" class="active">Products</a></li>
                     <li><a href="cart.html">Cart <span id="cart-count">0</span></a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login_signup.html" class="login-signup-link">Log In / Sign Up</a></li>
                 </ul>
             </nav>
         </div>
@@ -33,37 +34,58 @@
             <div class="container">
                 <h1 class="page-title">All Products</h1>
                 
-                <div class="filters">
+                <!-- Updated class and ID names to match our JavaScript -->
+                <div class="filters" id="filter-form">
                     <div class="filter-group">
-                        <label for="category">Category:</label>
-                        <select id="category">
+                        <label for="category-filter">Category:</label>
+                        <select id="category-filter">
                             <option value="all">All Categories</option>
-                            <option value="guitars">Guitars</option>
-                            <option value="ukuleles">Ukuleles</option>
-                            <option value="guitaleles">Guitaleles</option>
-                            <option value="sandhis">Sandhis</option>
-                            <option value="accessories">Accessories</option>
+                            <option value="Guitar">Guitars</option>
+                            <option value="Ukulele">Ukuleles</option>
+                            <option value="Guitalele">Guitaleles</option>
+                            <option value="Sandhi">Sandhis</option>
+                            <option value="Accessories">Accessories</option>
                         </select>
                     </div>
                     
                     <div class="filter-group">
-                        <label for="sort">Sort by:</label>
-                        <select id="sort">
+                        <label for="sort-select">Sort by:</label>
+                        <select id="sort-select">
                             <option value="default">Default</option>
-                            <option value="price-low">Price: Low to High</option>
-                            <option value="price-high">Price: High to Low</option>
+                            <option value="price-low-high">Price: Low to High</option>
+                            <option value="price-high-low">Price: High to Low</option>
+                            <option value="name-a-z">Name: A to Z</option>
+                            <option value="name-z-a">Name: Z to A</option>
                         </select>
                     </div>
+                    
+                    <!-- Added price range filter
+                    <div class="filter-group price-range-group">
+                        <label>Price Range:</label>
+                        <div class="price-inputs">
+                            <input type="number" id="price-min" min="0" placeholder="Min" value="0">
+                            <span>to</span>
+                            <input type="number" id="price-max" min="0" placeholder="Max" value="50000">
+                        </div>
+                        <div id="current-price-range" class="current-range">৳0 - ৳50000</div>
+                    </div> -->
                 </div>
                 
-                <div class="products-grid" id="products-container">
+                <!-- Loading indicator -->
+                <!-- <div id="loading-indicator" class="product-loader">Loading products...</div>
+                 -->
+                <!-- No results message -->
+                <div id="no-results" class="no-results" style="display: none;">
+                    No products match your filters. Try adjusting your criteria.
+                </div>
+                
+                <!-- Updated ID to match our JavaScript -->
+                <div class="products-grid" id="products-grid">
                     <!-- Products will be loaded here via JavaScript -->
-                    <div class="product-loader">Loading products...</div>
                 </div>
             </div>
         </section>
         
-        <!-- New section added here -->
         <section class="create-instrument-section">
             <div class="container">
                 <div class="create-instrument-content">
@@ -102,8 +124,9 @@
         </div>
     </footer>
 
+    <!-- Updated script tags to use modules -->
     <script src="script.js"></script>
-    <script src="products.js"></script>
+    <script type="module" src="products.js"></script>
     <script type="module" src="auth-ui.js"></script>
 </body>
 </html>

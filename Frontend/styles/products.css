@@ -16,6 +16,7 @@
 }
 
 .product-card:hover {
+    background-color: lavender;
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
@@ -235,20 +236,23 @@
     color: #95f0e5;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     padding: 50px 20px;
     text-align: center;
-    color: #2980b9;
-     height: 300px; /* Set the height of the section */
+    color: black;
+    height: 300px; /* Set the height of the section */
     width: 100%; /* Set the width of the section */
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 .create-instrument-content h2 {
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .create-instrument-button {
-    background-color: #d63031;
+    background-color: purple;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -259,7 +263,7 @@
 }
 
 .create-instrument-button:hover {
-    background-color: #2980b9;
+    background-color: red;
 }
 body {
     font-family: 'Futura PT', sans-serif;

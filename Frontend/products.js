@@ -1,99 +1,181 @@
+import { getAllProducts, getProductsByCategory, sortProducts } from '../Backend/product-service.js';
+
+// Global variables
 let products = [];
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, fetching products...');
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('DOM loaded, fetching products from backend service...');
     
-    // Show loader
-    document.getElementById('products-container').innerHTML = 
-        '<div class="product-loader">Loading products...</div>';
-    
-    fetch('script.js')
-        .then(response => {
-            console.log('Response status:', response.status);
+    try {
+        // Show loader
+        const productsContainer = document.getElementById('products-container') || 
+                                 document.getElementById('products-grid') || 
+                                 document.querySelector('.products-grid');
+        
+        if (productsContainer) {
+            productsContainer.innerHTML = '<div class="product-loader">Loading products...</div>';
+        } else {
+            console.error('Products container not found');
+        }
+        
+        // Get URL parameters for filtering
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get('category');
+        
+        // Fetch products from backend service
+        if (categoryParam && categoryParam !== 'all') {
+            console.log(`Fetching products with category: ${categoryParam}`);
+            products = await getProductsByCategory(categoryParam);
             
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            
-            return response.text().then(text => {
-                console.log('Raw response text:', text.substring(0, 100) + '...');
-                try {
-                    return JSON.parse(text);
-                } catch (e) {
-                    console.error('Error parsing JSON:', e);
-                    throw new Error('Invalid JSON response from server');
+            // Update category select to match the URL parameter
+            const categorySelect = document.getElementById('category');
+            if (categorySelect) {
+                for (let i = 0; i < categorySelect.options.length; i++) {
+                    if (categorySelect.options[i].value.toLowerCase() === categoryParam.toLowerCase()) {
+                        categorySelect.selectedIndex = i;
+                        break;
+                    }
                 }
-            });
-        })
-        .then(data => {
-            console.log('Data structure received:', data);
-            
-            // Check if we have a proper response structure
-            if (data && data.success && data.products) {
-                products = data.products;
-                console.log(`Loaded ${products.length} products successfully`);
-                displayProducts();
-            } else if (Array.isArray(data)) {
-                // Direct array of products
-                products = data;
-                console.log(`Loaded ${products.length} products (array format)`);
-                displayProducts();
-            } else {
-                console.error('Unexpected data format:', data);
-                document.getElementById('products-container').innerHTML = 
-                    '<div class="error-message">Invalid data format received from server</div>';
             }
-        })
-        .catch(error => {
-            console.error('Error fetching products:', error);
-            document.getElementById('products-container').innerHTML = 
+        } else {
+            console.log('Fetching all products');
+            products = await getAllProducts();
+        }
+        
+        console.log(`Loaded ${products.length} products successfully`);
+        
+        // Display products after fetching
+        displayProducts();
+        
+        // Add event listeners for filtering and sorting after products are displayed
+        setupEventListeners();
+        
+        // Update cart count
+        updateCartCount();
+        
+    } catch (error) {
+        console.error('Error loading products:', error);
+        const productsContainer = document.getElementById('products-container') || 
+                                 document.getElementById('products-grid') || 
+                                 document.querySelector('.products-grid');
+        if (productsContainer) {
+            productsContainer.innerHTML = 
                 `<div class="error-message">Unable to load products: ${error.message}</div>`;
-        });
-
-    // Add event listeners for filtering and sorting
-    document.getElementById('category').addEventListener('change', displayProducts);
-    document.getElementById('sort').addEventListener('change', displayProducts);
-    
-    // Update cart count
-    updateCartCount();
+        }
+    }
 });
+
+// Setup event listeners separately to ensure they're attached after elements are created
+function setupEventListeners() {
+    console.log('Setting up event listeners');
+    
+    // Category filter
+    const categorySelect = document.getElementById('category');
+    if (categorySelect) {
+        categorySelect.addEventListener('change', async function() {
+            const category = this.value;
+            console.log(`Category changed to: ${category}`);
+            
+            try {
+                // Show loading indicator
+                const productsContainer = document.getElementById('products-container') || 
+                                         document.getElementById('products-grid') || 
+                                         document.querySelector('.products-grid');
+                
+                if (productsContainer) {
+                    productsContainer.innerHTML = '<div class="product-loader">Loading products...</div>';
+                }
+                
+                // Fetch products by selected category
+                if (category === 'all') {
+                    products = await getAllProducts();
+                } else {
+                    products = await getProductsByCategory(category);
+                }
+                
+                // Display updated products
+                displayProducts();
+            } catch (error) {
+                console.error('Error updating products by category:', error);
+            }
+        });
+    } else {
+        console.warn('Category select element not found');
+    }
+    
+    // Sort filter
+    const sortSelect = document.getElementById('sort');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', function() {
+            console.log(`Sort changed to: ${this.value}`);
+            displayProducts();
+        });
+    } else {
+        console.warn('Sort select element not found');
+    }
+    
+    // Product card event listeners
+    document.querySelectorAll('.btn-view').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent any default behavior
+            
+            const productId = this.getAttribute('data-id');
+            console.log(`View button clicked for product ID: ${productId}`);
+            window.location.href = `product-detail.html?id=${productId}`;
+        });
+    });
+    
+    document.querySelectorAll('.btn-add-to-cart').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent any default behavior
+            
+            const productId = this.getAttribute('data-id');
+            console.log(`Add to cart button clicked for product ID: ${productId}`);
+            
+            if (this.hasAttribute('disabled')) {
+                return;
+            }
+            
+            if (!this.hasAttribute('data-in-cart')) {
+                addToCart(productId);
+                this.textContent = 'In Cart';
+                this.setAttribute('data-in-cart', '');
+            } else {
+                window.location.href = 'cart.html';
+            }
+        });
+    });
+    
+    console.log('Event listeners setup complete');
+}
 
 function displayProducts() {
     console.log('Displaying products, count:', products.length);
-    const productsContainer = document.getElementById('products-container');
+    const productsContainer = document.getElementById('products-container') || 
+                             document.getElementById('products-grid') || 
+                             document.querySelector('.products-grid');
+    
+    if (!productsContainer) {
+        console.error('Products container not found');
+        return;
+    }
     
     // Clear any existing content
     productsContainer.innerHTML = '';
     
-    // Get filter and sort values
-    const categoryFilter = document.getElementById('category').value;
-    const sortOption = document.getElementById('sort').value;
-    
-    console.log('Filter:', categoryFilter, 'Sort:', sortOption);
-    
-    // Filter products by category
-    let filteredProducts = products;
-    if (categoryFilter !== 'all') {
-        filteredProducts = products.filter(product => 
-            product.category && product.category.toLowerCase() === categoryFilter.toLowerCase()
-        );
-    }
-    
-    console.log('Filtered products count:', filteredProducts.length);
+    // Get sort value
+    const sortSelect = document.getElementById('sort');
+    const sortOption = sortSelect ? sortSelect.value : 'default';
     
     // Sort products
-    if (sortOption === 'price-low') {
-        filteredProducts.sort((a, b) => a.price - b.price);
-    } else if (sortOption === 'price-high') {
-        filteredProducts.sort((a, b) => b.price - a.price);
-    }
+    let displayedProducts = sortProducts(products, sortOption);
     
     // Display the products
-    if (filteredProducts.length === 0) {
+    if (displayedProducts.length === 0) {
         productsContainer.innerHTML = '<div class="no-products">No products found in this category</div>';
     } else {
-        filteredProducts.forEach(product => {
+        displayedProducts.forEach(product => {
             try {
                 const productCard = createProductCard(product);
                 productsContainer.appendChild(productCard);
@@ -101,6 +183,9 @@ function displayProducts() {
                 console.error('Error creating product card for:', product, error);
             }
         });
+        
+        // IMPORTANT: Re-attach event listeners after creating product cards
+        setupEventListeners();
     }
 }
 
@@ -109,6 +194,7 @@ function createProductCard(product) {
     
     const productDiv = document.createElement('div');
     productDiv.className = 'product-card';
+    productDiv.setAttribute('data-product-id', product.id);
     
     const isInCart = cart.some(item => item.id === product.id);
     
@@ -140,31 +226,12 @@ function createProductCard(product) {
         </div>
     `;
     
-    // Add event listeners
-    const viewButton = productDiv.querySelector('.btn-view');
-    viewButton.addEventListener('click', function() {
-        window.location.href = `product-details.html?id=${product.id}`;
-    });
-    
-    const addToCartButton = productDiv.querySelector('.btn-add-to-cart');
-    addToCartButton.addEventListener('click', function() {
-        if (product.stock <= 0) return;
-        
-        const productId = this.getAttribute('data-id');
-        
-        if (!this.hasAttribute('data-in-cart')) {
-            addToCart(productId);
-            this.textContent = 'In Cart';
-            this.setAttribute('data-in-cart', '');
-        } else {
-            window.location.href = 'cart.html';
-        }
-    });
-    
     return productDiv;
 }
 
 function addToCart(productId) {
+    console.log(`Adding product ID ${productId} to cart`);
+    
     const product = products.find(p => p.id == productId);
     
     if (!product) {

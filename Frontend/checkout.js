@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeModalBtn = document.querySelector('.close-modal');
     const continueShoppingBtn = document.getElementById('continueShoppingBtn');
     const orderNumberElement = document.getElementById('orderNumber');
+    const onlinePayment = document.getElementById('online');
+    const codPayment = document.getElementById('cod');
+    const transactionIdContainer = document.getElementById('transactionIdContainer');
     
     // Load cart items and update summary
     loadCartItems();
@@ -29,6 +32,20 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener('change', function() {
             updateTotalAmount();
         });
+    });
+    
+    // Payment method change event
+    onlinePayment.addEventListener('change', function() {
+        if(this.checked) {
+            transactionIdContainer.style.display = 'block';
+        }
+    });
+    
+    codPayment.addEventListener('change', function() {
+        if(this.checked) {
+            transactionIdContainer.style.display = 'none';
+            document.getElementById('transactionId').value = ''; // Clear the field
+        }
     });
     
     // Apply coupon button click
@@ -97,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         deliveryMethod: document.querySelector('input[name="deliveryMethod"]:checked').value,
         paymentMethod: document.querySelector('input[name="paymentMethod"]:checked').value,
+        transactionId: document.getElementById('transactionId').value.trim(),
         items: JSON.parse(localStorage.getItem('cart')) || [],
         subtotal: subtotalAmount,
         deliveryFee: document.querySelector('input[name="deliveryMethod"]:checked').value === 'home' ? deliveryFee : 0,
@@ -209,6 +227,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
         });
+        
+        // Validate transaction ID if online payment is selected
+        if (onlinePayment.checked) {
+            const transactionIdInput = document.getElementById('transactionId');
+            if (!transactionIdInput.value.trim()) {
+                addErrorMessage(transactionIdInput, 'Transaction ID is required for online payment');
+                isValid = false;
+            }
+        }
         
         // Validate email format
         const email = document.getElementById('email');

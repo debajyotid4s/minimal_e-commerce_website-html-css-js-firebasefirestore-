@@ -456,6 +456,11 @@ textarea:focus {
 .continue-btn:hover {
     background-color: var(--secondary-color);
 }
+.help-text {
+    font-size: 0.85rem;
+    color: var(--dark-gray);
+    margin-top: 5px;
+}
 
 /* Footer Styles */
 footer {

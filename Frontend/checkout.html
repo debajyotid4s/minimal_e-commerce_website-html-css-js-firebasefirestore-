@@ -32,7 +32,7 @@
             
             <div class="checkout-wrapper">
                 <div class="checkout-form">
-                    <form id="ceckoutForm">
+                    <form id="checkoutForm">
                         <div class="form-section">
                             <h2>Personal Information</h2>
                             
@@ -119,6 +119,13 @@
                                     <label for="online">Online Payment</label>
                                 </div>
                             </div>
+                            
+                            <!-- Transaction ID field - initially hidden -->
+                            <div id="transactionIdContainer" class="form-group" style="display: none; margin-top: 15px;">
+                                <label for="transactionId">Transaction ID *</label>
+                                <input type="text" id="transactionId" name="transactionId" placeholder="Enter your payment transaction ID">
+                                <p class="help-text">Please enter the transaction ID you received after completing your payment.</p>
+                            </div>
                         </div>
                         
                         <div class="form-section">
@@ -147,7 +154,7 @@
                         </div>
                         
                         <div class="form-actions">
-                            <button type="button" id="placeOrder" class="place-order-btn" onclick="window.location.href='thankyou.html'">Place Order</button>
+                            <button type="submit" id="placeOrder" class="place-order-btn">Place Order</button>
                         </div>
                     </form>
                 </div>

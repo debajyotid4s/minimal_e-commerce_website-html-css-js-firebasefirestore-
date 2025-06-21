@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Anusswar</title>
+    <link rel="icon" href="assets/anusswar.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link href="https://fonts.cdnfonts.com/css/futura-pt" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/anusswar.jpg" alt="Anusswar Logo" width="40" height="40">
+                <h1><b>অনুস্বর / Anusswar</b></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="home-button">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="dashboard-title">Your Dashboard</h1>
+            
+            <!-- Pending Orders Section -->
+            <section class="dashboard-section">
+                <h2>Pending Orders</h2>
+                <div class="card-container" id="pending-orders">
+                    <div class="loading">Loading pending orders...</div>
+                    <!-- Orders will be loaded dynamically from backend -->
+                </div>
+            </section>
+
+            <!-- Custom Instrument Requests Section -->
+            <section class="dashboard-section">
+                <h2>Custom Instrument Requests</h2>
+                <div class="card-container" id="custom-requests">
+                    <div class="loading">Loading custom instrument requests...</div>
+                    <!-- Custom instrument requests will be loaded dynamically from backend -->
+                </div>
+            </section>
+
+            <!-- Learning Instrument Requests Section -->
+            <section class="dashboard-section">
+                <h2>Learning Instrument Requests</h2>
+                <div class="card-container" id="learning-requests">
+                    <div class="loading">Loading learning requests...</div>
+                    <!-- Learning instrument requests will be loaded dynamically from backend -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>অনুস্বর / Anusswar</h3>
+                    <p>SOULFUL INSTRUMENTS FOR GREAT LIFE</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: anusswarguitars@gmail.com</p>
+                    <p>Phone: (+88) 01721-514669</p>
+                    <p>Address: Shonirakhra, Gobindapur Road no. 1, Dhaka, Bangladesh</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Anusswar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/dashboard.js"></script>
+    <script type="module" src="auth-ui.js"></script>
+</body>
+</html>

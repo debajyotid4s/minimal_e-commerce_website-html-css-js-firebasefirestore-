@@ -145,7 +145,101 @@ nav ul li a:hover, nav ul li a.active {
 /* Products Grid */
 .section-title {
     text-align: center;
-    margin: 40px 0 30px;
+    margin: 20px 0 30px;
+}
+.slideshow-section {
+  padding: 40px 0;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.section-title {
+    margin-top: 10px;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #333;
+  font-weight: bold;
+}
+
+.slideshow-container {
+  max-width: 1000px; /* Adjust this to your desired width */
+  width: 100%;
+  position: relative;
+  margin: auto;
+  height: 600px; /* Set a fixed height if needed */
+}
+
+.mySlides {
+  display: none;
+}
+
+.mySlides img {
+  width: 100%; /* Takes full width of the container */
+  height: 600px; /* Set your desired height */
+  object-fit: cover; /* This maintains aspect ratio without distortion */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10; /* Ensure buttons are above the images */
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Dots */
+.dots-container {
+  text-align: center;
+  margin-top: 20px;
+  position: relative;
+  z-index: 10; /* Ensure dots are above the images */
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
 }
 
 .featured-products, .categories {
